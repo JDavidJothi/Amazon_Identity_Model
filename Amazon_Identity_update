@@ -1,0 +1,56 @@
+SELECT * FROM [dbo].[tblEmployee_3];
+
+
+CREATE PROCEDURE spGetEmployeeCountByGender 
+@Gender NVARCHAR(20), 
+@EmployeeCount INT OUTPUT
+AS 
+BEGIN 
+	SELECT COUNT(*) FROM tblEmployee_3 WHERE Gender = 'Male'
+END
+
+CREATE PROCEDURE spGetEmployeeCountByGender 
+@Gender NVARCHAR(20), 
+@EmployeeCount INT OUTPUT
+AS 
+BEGIN 
+	SELECT @EmployeeCount = COUNT(ID) FROM tblEmployee_3 WHERE Gender = @Gender
+END
+
+DECLARE @TotalCount INT 
+EXECUTE spGetEmployeeCountByGender 'Male', @TotalCount OUTPUT 
+PRINT @TotalCount
+
+
+--DECLARE @TotalCount INT 
+EXECUTE spGetEmployeeCountByGender 'Male', @TotalCount
+if(@TotalCount IS NULL)
+	PRINT '@TotalCount is null'
+else
+	PRINT '@TotalCount is null'
+PRINT @TotalCount
+
+
+--DECLARE @TotalCount INT 
+EXECUTE spGetEmployeeCountByGender 'Male', @TotalCount OUT
+if(@TotalCount IS NULL)
+	PRINT '@TotalCount is null'
+else
+	PRINT '@TotalCount is null'
+
+
+DECLARE @TotalCount INT 
+EXECUTE spGetEmployeeCountByGender @EmployeeCount =  @TotalCount OUT, @Gender = 'Male'
+PRINT @TotalCount
+
+sp_help spGetEmployeeCountByGender
+
+sp_help tblEmployee_3
+
+
+tblEmployee_3
+
+sp_helptext spGetEmployeeCountByGender
+
+sp_depends spGetEmployeeCountByGender
+
